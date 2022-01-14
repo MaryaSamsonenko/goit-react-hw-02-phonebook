@@ -1,11 +1,27 @@
-export const ContactList = ({ contacts }) => {
+import { Button, List, Item, Description } from "./ContactList.styled";
+
+export const ContactList = ({ contacts, filter }) => {
   return (
-    <ul className="contactList">
-      {contacts.map(({ id, name, number }) => (
-        <li key={id} name={name}>
-          {name}: {number}
-        </li>
-      ))}
-    </ul>
+    <List className="contactList">
+      {filter
+        ? contacts
+            .filter(({ name }) =>
+              name.toLowerCase().includes(filter.toLowerCase())
+            )
+            .map(({ id, name, number }) => (
+              <Item key={id} name={name}>
+                <Description>{name}:</Description>{" "}
+                <Description>{number}</Description>
+                <Button type="button">Delete</Button>
+              </Item>
+            ))
+        : contacts.map(({ id, name, number }) => (
+            <Item key={id} name={name}>
+              <Description>{name}:</Description>{" "}
+              <Description>{number}</Description>
+              <Button type="button">Delete</Button>
+            </Item>
+          ))}
+    </List>
   );
 };

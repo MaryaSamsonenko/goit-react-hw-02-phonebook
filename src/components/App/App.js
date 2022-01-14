@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { nanoid } from "nanoid";
 import { ContactForm } from "../ContactForm/ContactForm";
+import { Filter } from "../Filter/Filter";
 import { ContactList } from "../ContactList/ContactList";
+import { Container } from "./App.styled";
+
 export class App extends Component {
   state = {
     contacts: [
@@ -13,20 +15,28 @@ export class App extends Component {
     filter: "",
   };
 
-  generateId = () => nanoid();
-
+  onSubmit = (newContact) => {
+    this.setState((prevState) => {
+      return { contacts: [...prevState.contacts, newContact] };
+    });
+  };
+  onSearch = (filter) => {
+    this.setState((prevState) => {
+      return { ...prevState, filter: filter };
+    });
+  };
   render() {
     const { filter, contacts } = this.state;
 
     return (
-      <div>
+      <Container>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm onSubmit={this.onSubmit} />
 
         <h2>Contacts</h2>
-        {/* <Filter /> */}
-        <ContactList contacts={contacts} />
-      </div>
+        <Filter onChange={this.onSearch} />
+        <ContactList contacts={contacts} filter={filter} />
+      </Container>
     );
   }
 }
