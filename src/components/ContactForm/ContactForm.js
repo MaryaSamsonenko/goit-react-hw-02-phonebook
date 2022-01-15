@@ -15,7 +15,9 @@ export class ContactForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const hasNameInContacts = this.props.contacts.find(
-      (contact) => contact.name === event.target.elements.name.value
+      (contact) =>
+        contact.name.toLowerCase() ===
+        event.target.elements.name.value.toLowerCase()
     );
     if (hasNameInContacts) {
       alert(`${event.target.elements.name.value} is already in contacts`);
