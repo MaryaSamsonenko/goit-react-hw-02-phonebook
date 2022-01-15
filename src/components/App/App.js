@@ -17,7 +17,7 @@ export class App extends Component {
 
   onSubmit = (newContact) => {
     this.setState((prevState) => {
-      return { contacts: [...prevState.contacts, newContact] };
+      return { contacts: [newContact, ...prevState.contacts] };
     });
   };
   onSearch = (filter) => {
