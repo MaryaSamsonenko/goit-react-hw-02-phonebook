@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
+import PropTypes from "prop-types";
 import { Form, Label, Input, ButtonSubmit } from "./ContactForm.styled";
 
 export class ContactForm extends Component {
@@ -13,7 +14,15 @@ export class ContactForm extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
+    const hasNameInContacts = this.props.contacts.find(
+      (contact) => contact.name === event.target.elements.name.value
+    );
+    if (hasNameInContacts) {
+      alert(`${event.target.elements.name.value} is already in contacts`);
+      return;
+    }
     this.props.onSubmit({ ...this.state, id: nanoid(4) });
+    event.target.reset();
   };
 
   render() {
@@ -21,7 +30,6 @@ export class ContactForm extends Component {
       <Form onSubmit={this.handleSubmit}>
         <Label htmlFor="name">Name </Label>
         <div>
-          {" "}
           <Input
             type="text"
             name="name"
@@ -51,3 +59,7 @@ export class ContactForm extends Component {
     );
   }
 }
+ContactForm.propType = {
+  value: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};

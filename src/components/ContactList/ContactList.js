@@ -1,6 +1,6 @@
 import { Button, List, Item, Description } from "./ContactList.styled";
 
-export const ContactList = ({ contacts, filter }) => {
+export const ContactList = ({ contacts, filter, onDelete }) => {
   return (
     <List className="contactList">
       {filter
@@ -19,7 +19,9 @@ export const ContactList = ({ contacts, filter }) => {
             <Item key={id} name={name}>
               <Description>{name}:</Description>{" "}
               <Description>{number}</Description>
-              <Button type="button">Delete</Button>
+              <Button type="button" onClick={() => onDelete(id)}>
+                Delete
+              </Button>
             </Item>
           ))}
     </List>

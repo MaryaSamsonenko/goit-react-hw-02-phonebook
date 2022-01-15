@@ -25,17 +25,31 @@ export class App extends Component {
       return { ...prevState, filter: filter };
     });
   };
+
+  onDelete = (id) => {
+    const contactsFilter = this.state.contacts.filter(
+      (contact) => contact.id !== id
+    );
+    this.setState((prevState) => {
+      return { ...prevState, contacts: [...contactsFilter] };
+    });
+  };
+
   render() {
     const { filter, contacts } = this.state;
 
     return (
       <Container>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.onSubmit} />
+        <ContactForm onSubmit={this.onSubmit} contacts={contacts} />
 
         <h2>Contacts</h2>
         <Filter onChange={this.onSearch} />
-        <ContactList contacts={contacts} filter={filter} />
+        <ContactList
+          contacts={contacts}
+          filter={filter}
+          onDelete={this.onDelete}
+        />
       </Container>
     );
   }

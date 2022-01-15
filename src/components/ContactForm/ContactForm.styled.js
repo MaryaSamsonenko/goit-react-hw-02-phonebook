@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 export const Form = styled.form`
   text-align: center;
+  margin: 0 auto;
   margin-bottom: 24px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 20px 0;
 `;
 export const Label = styled.label`
   color: grey;
@@ -11,7 +15,7 @@ export const Input = styled.input`
   border: none;
   outline: none;
   border-radius: 4px;
-  color: grey;
+  width: 400px;
   padding: 12px;
   margin-bottom: 16px;
 `;
