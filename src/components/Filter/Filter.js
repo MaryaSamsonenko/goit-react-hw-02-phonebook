@@ -24,4 +24,5 @@ export class Filter extends Component {
 }
 Filter.propType = {
   value: PropTypes.string,
+  handleSearch: PropTypes.func.isRequired,
 };
