@@ -32,13 +32,17 @@ export class App extends Component {
 
   getFiltredContacts = () => {
     const { contacts, filter } = this.state;
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
+    if (filter) {
+      return contacts.filter(({ name }) =>
+        name.toLowerCase().includes(filter.toLowerCase())
+      );
+    } else {
+      return contacts;
+    }
   };
 
   render() {
-    const { filter, contacts } = this.state;
+    const { contacts } = this.state;
 
     return (
       <Container>
@@ -48,8 +52,6 @@ export class App extends Component {
         <h2>Contacts</h2>
         <Filter onChange={this.onSearch} />
         <ContactList
-          contacts={contacts}
-          filter={filter}
           onDelete={this.onDelete}
           filtredContacts={this.getFiltredContacts()}
         />
