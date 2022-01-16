@@ -32,6 +32,5 @@ ContactList.propType = {
   contacts: PropTypes.array.isRequired,
   filter: PropTypes.string.isRequired,
   filtredContacts: PropTypes.array.isRequired,
-  contact: PropTypes.object.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
