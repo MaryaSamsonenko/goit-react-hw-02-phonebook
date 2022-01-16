@@ -35,6 +35,7 @@ export class ContactForm extends Component {
           <Input
             type="text"
             name="name"
+            autoComplete="off"
             placeholder="Enter name"
             onChange={this.handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -48,6 +49,7 @@ export class ContactForm extends Component {
           <Input
             type="tel"
             name="number"
+            autoComplete="off"
             placeholder="Enter tel"
             onChange={this.handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -62,6 +64,5 @@ export class ContactForm extends Component {
   }
 }
 ContactForm.propType = {
-  value: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

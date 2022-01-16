@@ -1,41 +1,37 @@
 import PropTypes from "prop-types";
-import { Button, List, Item, Description } from "./ContactList.styled";
+import { ContactItem } from "../ContactsItem/ContactsItem";
+import { List } from "./ContactList.styled";
 
-export const ContactList = ({ contacts, filter, onDelete }) => {
+export const ContactList = ({
+  contacts,
+  filter,
+  filtredContacts,
+  onDelete,
+}) => {
   return (
-    <List className="contactList">
+    <List>
       {filter
-        ? contacts
-            .filter(({ name }) =>
-              name.toLowerCase().includes(filter.toLowerCase())
-            )
-            .map(({ id, name, number }) => (
-              <Item key={id} name={name}>
-                <Description>{name}:</Description>{" "}
-                <Description>{number}</Description>
-                <Button type="button">Delete</Button>
-              </Item>
-            ))
-        : contacts.map(({ id, name, number }) => (
-            <Item key={id} name={name}>
-              <Description>{name}:</Description>{" "}
-              <Description>{number}</Description>
-              <Button type="button" onClick={() => onDelete(id)}>
-                Delete
-              </Button>
-            </Item>
+        ? filtredContacts.map((contact) => (
+            <ContactItem
+              key={contact.id}
+              contact={contact}
+              onDelete={onDelete}
+            />
+          ))
+        : contacts.map((contact) => (
+            <ContactItem
+              key={contact.id}
+              contact={contact}
+              onDelete={onDelete}
+            />
           ))}
     </List>
   );
 };
 ContactList.propType = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.number.isRequired,
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  contacts: PropTypes.array.isRequired,
   filter: PropTypes.string.isRequired,
+  filtredContacts: PropTypes.array.isRequired,
+  contact: PropTypes.object.isRequired,
   onDelete: PropTypes.func.isRequired,
 };

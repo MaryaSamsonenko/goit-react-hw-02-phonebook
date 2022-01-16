@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { SearchWrapper, Label, Input } from "../Filter/Filter.styled";
 
 export class Filter extends Component {
@@ -12,6 +11,7 @@ export class Filter extends Component {
         <Label htmlFor="name">Find contacts by name </Label>
         <div>
           <Input
+            autoComplete="off"
             type="text"
             name="name"
             placeholder="Search name"
@@ -22,7 +22,3 @@ export class Filter extends Component {
     );
   }
 }
-Filter.propType = {
-  value: PropTypes.string,
-  handleSearch: PropTypes.func.isRequired,
-};
